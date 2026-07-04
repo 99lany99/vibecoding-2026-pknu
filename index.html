@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube 학습 기록</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <p class="eyebrow">youtube log</p>
+      <h1>유튜브 학습 기록</h1>
+      <p class="lead">
+        공부할 때 본 유튜브 영상 URL을 저장하고, 다시 열어보고,
+        완료 표시까지 할 수 있는 간단한 기록 앱입니다.
+      </p>
+
+      <form id="logForm" class="entry-form" autocomplete="off">
+        <label class="input-label" for="urlInput">유튜브 URL</label>
+        <div class="input-row">
+          <input
+            id="urlInput"
+            name="url"
+            type="text"
+            inputmode="url"
+            placeholder="https://www.youtube.com/watch?v=..."
+            aria-describedby="helperText"
+            required
+          />
+          <button type="submit" class="primary-button">저장</button>
+        </div>
+        <p id="helperText" class="helper">
+          `youtu.be`, `youtube.com/watch`, `shorts` 링크를 모두 저장할 수 있습니다.
+          제목과 썸네일은 자동으로 가져오고, 제목에서 만든 #태그도 함께 검색할 수 있습니다.
+        </p>
+      </form>
+
+      <div class="stats" aria-label="기록 요약">
+        <div class="stat-card">
+          <span class="stat-label">전체</span>
+          <strong id="totalCount">0</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">학습완료</span>
+          <strong id="doneCount">0</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">남은 기록</span>
+          <strong id="todoCount">0</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="list-section" aria-label="저장된 유튜브 목록">
+      <div class="section-header">
+        <div>
+          <h2>저장 목록</h2>
+          <p class="section-subtitle">검색하고 정렬하면서 학습 기록을 관리해보세요.</p>
+        </div>
+        <button id="clearAllButton" class="ghost-button" type="button">전체 삭제</button>
+      </div>
+
+      <div class="list-tools" aria-label="목록 검색 및 정렬">
+        <div class="search-group">
+          <select id="searchModeSelect" class="search-mode-select" aria-label="검색 방식">
+            <option value="keyword">키워드</option>
+            <option value="date">날짜</option>
+            <option value="month">월</option>
+          </select>
+          <input id="keywordSearchInput" class="search-input active" type="search" placeholder="제목, URL, 태그 검색" />
+          <input id="dateSearchInput" class="search-input hidden" type="date" />
+          <input id="monthSearchInput" class="search-input hidden" type="month" />
+        </div>
+        <select id="sortSelect" class="sort-select" aria-label="정렬 방식">
+          <option value="newest">최신순</option>
+          <option value="oldest">오래된순</option>
+          <option value="title">제목순</option>
+          <option value="status">완료 상태순</option>
+        </select>
+      </div>
+
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+      <ul id="videoList" class="video-list"></ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
